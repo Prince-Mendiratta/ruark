@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="en" className={GeistSans.variable}>
       <body className="min-h-screen bg-background antialiased">
         <Navigation />
-        <main className="pl-64">
+        <main className="md:pl-64">
           {children}
         </main>
       </body>

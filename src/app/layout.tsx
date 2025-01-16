@@ -1,6 +1,7 @@
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 import "@/styles/globals.css";
+import Navigation from "@/components/Navigation";
 
 export const metadata: Metadata = {
   title: "Hedera Token Tracker",
@@ -16,7 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={GeistSans.variable}>
       <body className="min-h-screen bg-background antialiased">
-        {children}
+        <Navigation />
+        <main className="pl-64">
+          {children}
+        </main>
       </body>
     </html>
   );

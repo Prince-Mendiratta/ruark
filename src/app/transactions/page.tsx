@@ -50,14 +50,14 @@ export default function TransactionsPage() {
   const [search, setSearch] = useState("");
 
   const filteredTransactions = transactions.filter(tx => 
-    tx.memo.toLowerCase().includes(search.toLowerCase()) ||
+    tx.token.toLowerCase().includes(search.toLowerCase()) ||
     tx.to.toLowerCase().includes(search.toLowerCase()) ||
     tx.from.toLowerCase().includes(search.toLowerCase())
   );
 
   const downloadTransactions = () => {
     const csv = [
-      ["Transaction ID", "Type", "Amount", "Token", "To", "From", "Date", "Status", "Memo"],
+      ["Transaction ID", "Type", "Amount", "Token", "To", "From", "Date", "Status"],
       ...filteredTransactions.map(tx => [
         tx.id,
         tx.type,
@@ -66,8 +66,7 @@ export default function TransactionsPage() {
         tx.to,
         tx.from,
         new Date(tx.timestamp).toLocaleString(),
-        tx.status,
-        tx.memo
+        tx.status
       ])
     ].map(row => row.join(",")).join("\n");
 
@@ -149,7 +148,7 @@ export default function TransactionsPage() {
                 <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">To</th>
                 <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">From</th>
                 <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">Date</th>
-                <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">Memo</th>
+                <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">Token</th>
                 <th className="text-right py-3 px-4 text-sm font-medium text-muted-foreground">Actions</th>
               </tr>
             </thead>
@@ -188,7 +187,12 @@ export default function TransactionsPage() {
                       <span>{new Date(tx.timestamp).toLocaleDateString()}</span>
                     </div>
                   </td>
-                  <td className="py-4 px-4 text-muted-foreground">{tx.memo}</td>
+                  <td className="py-4 px-4">
+                    <div className="flex items-center gap-2">
+                      <span className="font-medium">{tx.token}</span>
+                      <span className="text-xs px-2 py-0.5 bg-muted rounded-full text-muted-foreground">Token</span>
+                    </div>
+                  </td>
                   <td className="py-4 px-4 text-right">
                     <motion.a
                       href={`https://hashscan.io/mainnet/transaction/${tx.id}`}

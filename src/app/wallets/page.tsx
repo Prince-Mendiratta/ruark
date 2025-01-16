@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, ChevronRight, Copy, Plus, Wallet } from "lucide-react";
+import SparkBorder from "@/components/SparkBorder";
 import { format } from "date-fns";
 import { useWalletStore } from "@/lib/store/walletStore";
 import ConfirmDialog from "@/components/ConfirmDialog";
@@ -111,17 +112,32 @@ export default function WalletsPage() {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-card p-6 rounded-lg border mb-8"
+          className="mb-8"
         >
-          <div className="flex items-center gap-4">
-            <div className="p-3 bg-primary/10 rounded-full">
-              <Wallet className="w-6 h-6 text-primary" />
+          <SparkBorder>
+            <div className="p-6">
+              <div className="flex items-center gap-4">
+                <div className="relative">
+                  <div className="p-3 bg-primary/10 rounded-full">
+                    <Wallet className="w-6 h-6 text-primary" />
+                  </div>
+                  <motion.div
+                    className="absolute -inset-1 rounded-full bg-primary/20"
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                </div>
+                <div>
+                  <h2 className="text-lg font-medium mb-1">Active Wallet</h2>
+                  <p className="font-mono text-muted-foreground">{activeWallet.address}</p>
+                </div>
+              </div>
             </div>
-            <div>
-              <h2 className="text-lg font-medium mb-1">Active Wallet</h2>
-              <p className="font-mono text-muted-foreground">{activeWallet.address}</p>
-            </div>
-          </div>
+          </SparkBorder>
         </motion.div>
       )}
 

@@ -49,11 +49,11 @@ export default function TokenGrid() {
           className="bg-card p-4 sm:p-6 rounded-lg shadow-sm border"
         >
           <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
               <img 
                 src={token.image} 
                 alt={token.name}
-                className="w-12 h-12 rounded-full ring-2 ring-border"
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-full ring-2 ring-border"
               />
               <div>
                 <h3 className="font-semibold text-lg">{token.name}</h3>

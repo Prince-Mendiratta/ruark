@@ -32,7 +32,7 @@ export default function TokenPriceChart({ positive }: TokenPriceChartProps) {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="h-32 w-full"
+      className="h-28 sm:h-32 w-full"
     >
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart

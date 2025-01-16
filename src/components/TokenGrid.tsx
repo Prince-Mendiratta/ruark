@@ -39,14 +39,14 @@ const tokens = [
 
 export default function TokenGrid() {
   return (
-    <div className="grid grid-cols-3 gap-4 mb-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
       {tokens.map((token) => (
         <motion.div
           key={token.id}
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           whileHover={{ scale: 1.02 }}
-          className="bg-card p-6 rounded-lg shadow-sm border"
+          className="bg-card p-4 sm:p-6 rounded-lg shadow-sm border"
         >
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
@@ -72,7 +72,7 @@ export default function TokenGrid() {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <p className="text-sm text-muted-foreground mb-1">Balance</p>
-                <p className="text-lg font-semibold">{token.balance}</p>
+                <p className="text-base sm:text-lg font-semibold">{token.balance}</p>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground mb-1">Value</p>

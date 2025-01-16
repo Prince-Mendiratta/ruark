@@ -19,7 +19,23 @@ interface WalletStore {
 export const useWalletStore = create<WalletStore>()(
   persist(
     (set, get) => ({
-      wallets: [],
+      wallets: [
+        {
+          address: "0.0.1234567",
+          isActive: true,
+          dateAdded: "2024-01-10T09:30:00.000Z"
+        },
+        {
+          address: "0.0.7654321", 
+          isActive: false,
+          dateAdded: "2024-01-12T14:45:00.000Z"
+        },
+        {
+          address: "0.0.9876543",
+          isActive: false,
+          dateAdded: "2024-01-15T11:20:00.000Z"
+        }
+      ],
       addWallet: (address) => {
         const wallet: Wallet = {
           address,

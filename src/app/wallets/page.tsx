@@ -124,10 +124,29 @@ export default function WalletsPage() {
         </form>
       </div>
 
-      {/* Connected Wallets Table */}
+      {/* Active Wallet Banner */}
+      {activeWallet && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-card p-6 rounded-lg border mb-8"
+        >
+          <div className="flex items-center gap-4">
+            <div className="p-3 bg-primary/10 rounded-full">
+              <Wallet className="w-6 h-6 text-primary" />
+            </div>
+            <div>
+              <h2 className="text-lg font-medium mb-1">Active Wallet</h2>
+              <p className="font-mono text-muted-foreground">{activeWallet.address}</p>
+            </div>
+          </div>
+        </motion.div>
+      )}
+
+      {/* Recent Wallets Table */}
       <div className="bg-card rounded-lg border">
         <div className="p-6 border-b">
-          <h2 className="text-xl font-semibold">Connected Wallets</h2>
+          <h2 className="text-xl font-semibold">Recent Wallets</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full">

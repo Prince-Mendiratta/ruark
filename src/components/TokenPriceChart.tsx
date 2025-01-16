@@ -61,17 +61,21 @@ export default function TokenPriceChart({ positive }: TokenPriceChartProps) {
           <YAxis hide domain={["dataMin - 10", "dataMax + 10"]} />
           <Tooltip
             content={({ active, payload }) => {
-              if (active && payload && payload.length) {
-                return (
-                  <div className="rounded-lg bg-background p-2 shadow-lg ring-1 ring-border">
-                    <p className="text-sm font-medium">
-                      ${payload[0].value.toFixed(2)}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      {format(new Date(payload[0].payload.date), "MMM d, yyyy")}
-                    </p>
-                  </div>
-                );
+              if (active && payload && payload.length > 0 && payload[0].value) {
+                const value = Number(payload[0].value);
+                const date = payload[0].payload?.date;
+                if (typeof value === 'number' && date) {
+                  return (
+                    <div className="rounded-lg bg-background p-2 shadow-lg ring-1 ring-border">
+                      <p className="text-sm font-medium">
+                        ${value.toFixed(2)}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        {format(new Date(date), "MMM d, yyyy")}
+                      </p>
+                    </div>
+                  );
+                }
               }
               return null;
             }}

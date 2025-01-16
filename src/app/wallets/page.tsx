@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, ChevronRight, Plus, Wallet } from "lucide-react";
+import { Check, ChevronRight, Copy, Plus, Wallet } from "lucide-react";
 import { format } from "date-fns";
 import { useWalletStore } from "@/lib/store/walletStore";
 import ConfirmDialog from "@/components/ConfirmDialog";
@@ -52,24 +52,6 @@ export default function WalletsPage() {
 
   return (
     <div className="container mx-auto max-w-7xl px-3 sm:px-4 py-6 sm:py-8">
-      {/* Active Wallet Banner */}
-      {activeWallet && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-card p-6 rounded-lg border mb-8"
-        >
-          <div className="flex items-center gap-4">
-            <div className="p-3 bg-primary/10 rounded-full">
-              <Wallet className="w-6 h-6 text-primary" />
-            </div>
-            <div>
-              <h2 className="text-lg font-medium mb-1">Active Wallet</h2>
-              <p className="font-mono text-muted-foreground">{activeWallet.address}</p>
-            </div>
-          </div>
-        </motion.div>
-      )}
 
       {/* Add New Wallet Form */}
       <div className="bg-card p-6 rounded-lg border mb-8">

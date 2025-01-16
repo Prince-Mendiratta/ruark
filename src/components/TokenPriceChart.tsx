@@ -61,10 +61,10 @@ export default function TokenPriceChart({ positive }: TokenPriceChartProps) {
           <YAxis hide domain={["dataMin - 10", "dataMax + 10"]} />
           <Tooltip
             content={({ active, payload }) => {
-              if (active && payload && payload.length > 0 && payload[0].value) {
+              if (active && payload?.[0]?.value) {
                 const value = Number(payload[0].value);
-                const date = payload[0].payload?.date;
-                if (typeof value === 'number' && date) {
+                const date = payload[0]?.payload?.date;
+                if (!isNaN(value) && date) {
                   return (
                     <div className="rounded-lg bg-background p-2 shadow-lg ring-1 ring-border">
                       <p className="text-sm font-medium">

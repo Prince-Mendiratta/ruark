@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { LayoutDashboard, Wallet, ArrowLeftRight, Settings, Menu, X } from "lucide-react";
+import { LayoutDashboard, Wallet, ArrowLeftRight, Settings, Menu, X, HelpCircle, LogOut } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -49,13 +49,34 @@ export default function Navigation() {
 
       {/* Desktop Sidebar */}
       <nav className="fixed left-0 top-0 h-full w-64 bg-sidebar p-4 hidden md:block">
-        <div className="mb-8 px-4 py-2">
-          <h1 className="text-xl font-semibold text-sidebar-foreground">Hedera Tracker</h1>
-        </div>
-        <div className="space-y-1">
-          {navItems.map((item) => (
-            <NavItem key={item.href} item={item} isActive={pathname === item.href} />
-          ))}
+        <div className="flex flex-col h-full">
+          <div className="mb-8 px-4 py-2">
+            <h1 className="text-xl font-semibold text-sidebar-foreground">Hedera Tracker</h1>
+          </div>
+          <div className="space-y-1">
+            {navItems.map((item) => (
+              <NavItem key={item.href} item={item} isActive={pathname === item.href} />
+            ))}
+          </div>
+          <div className="mt-auto pt-4 border-t border-sidebar-border">
+            <button 
+              onClick={() => window.open('https://docs.hedera.com', '_blank')}
+              className="w-full flex items-center gap-3 rounded-lg px-4 py-2 text-sm font-medium text-sidebar-foreground/60 hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground transition-colors"
+            >
+              <HelpCircle className="h-4 w-4" />
+              <span>Help & Documentation</span>
+            </button>
+            <button 
+              onClick={() => {
+                // Add sign out logic here
+                console.log('Sign out clicked');
+              }}
+              className="w-full flex items-center gap-3 rounded-lg px-4 py-2 text-sm font-medium text-destructive hover:bg-destructive/10 transition-colors mt-2"
+            >
+              <LogOut className="h-4 w-4" />
+              <span>Sign Out</span>
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -80,15 +101,40 @@ export default function Navigation() {
               <div className="mb-8">
                 <h1 className="text-xl font-semibold text-sidebar-foreground">Hedera Tracker</h1>
               </div>
-              <div className="space-y-2">
-                {navItems.map((item) => (
-                  <NavItem 
-                    key={item.href} 
-                    item={item} 
-                    isActive={pathname === item.href}
-                    onClick={() => setIsOpen(false)}
-                  />
-                ))}
+              <div className="flex flex-col h-[calc(100%-80px)]">
+                <div className="space-y-2">
+                  {navItems.map((item) => (
+                    <NavItem 
+                      key={item.href} 
+                      item={item} 
+                      isActive={pathname === item.href}
+                      onClick={() => setIsOpen(false)}
+                    />
+                  ))}
+                </div>
+                <div className="mt-auto pt-4 border-t border-sidebar-border">
+                  <button 
+                    onClick={() => {
+                      window.open('https://docs.hedera.com', '_blank');
+                      setIsOpen(false);
+                    }}
+                    className="w-full flex items-center gap-3 rounded-lg px-4 py-2 text-sm font-medium text-sidebar-foreground/60 hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground transition-colors"
+                  >
+                    <HelpCircle className="h-4 w-4" />
+                    <span>Help & Documentation</span>
+                  </button>
+                  <button 
+                    onClick={() => {
+                      // Add sign out logic here
+                      console.log('Sign out clicked');
+                      setIsOpen(false);
+                    }}
+                    className="w-full flex items-center gap-3 rounded-lg px-4 py-2 text-sm font-medium text-destructive hover:bg-destructive/10 transition-colors mt-2"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    <span>Sign Out</span>
+                  </button>
+                </div>
               </div>
             </motion.nav>
           </>

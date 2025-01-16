@@ -73,29 +73,31 @@ export default function SettingsPage() {
         animate={{ opacity: 1, y: 0 }}
         className="mb-8"
       >
-        <SparkBorder>
-          <div className="p-6">
-            <div className="flex items-center gap-4">
+        <div className="bg-card border rounded-lg p-8">
+          <div className="flex items-center space-x-6">
+            <div className="relative">
               <img
                 src={userData.avatar}
                 alt={userData.name}
-                className="w-16 h-16 rounded-full ring-2 ring-border"
+                className="w-14 h-14 rounded-full object-cover ring-2 ring-border"
               />
-              <div>
-                <h2 className="text-xl font-semibold">{userData.name}</h2>
-                <p className="text-muted-foreground">{userData.email}</p>
-                <p className="text-sm text-muted-foreground mt-1">Member since {userData.joinDate}</p>
-              </div>
-              <div className="ml-auto">
-                <button 
-                  className="min-w-[120px] min-h-[44px] px-6 py-3 bg-primary text-primary-foreground text-base font-medium rounded-lg hover:bg-primary/90 active:bg-primary/80 transition-colors shadow-sm hover:shadow focus:outline-none focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
-                >
-                  Edit Profile
-                </button>
+              <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-background" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <h2 className="text-lg font-medium truncate">{userData.name}</h2>
+              <div className="flex items-center gap-2 mt-1">
+                <p className="text-sm text-muted-foreground truncate">{userData.email}</p>
+                <span className="inline-block w-1 h-1 rounded-full bg-border" />
+                <p className="text-sm text-muted-foreground">Since {userData.joinDate}</p>
               </div>
             </div>
+            <button 
+              className="px-4 py-2 text-sm font-medium text-primary hover:text-primary/90 transition-colors"
+            >
+              Edit Profile
+            </button>
           </div>
-        </SparkBorder>
+        </div>
       </motion.div>
 
       {/* Theme Toggle */}

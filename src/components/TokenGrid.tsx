@@ -119,14 +119,15 @@ export default function TokenGrid() {
           </div>
         </motion.div>
       ))}
+      </div>
     </div>
-    </div>
-    
+
     <TokenReplaceModal
       isOpen={isReplaceModalOpen}
       onClose={() => {
         setIsReplaceModalOpen(false);
         setSelectedTokenId(null);
+        setError(null);
       }}
       onReplace={handleReplaceToken}
       currentTokenId={selectedTokenId || ""}

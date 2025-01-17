@@ -71,7 +71,6 @@ export default function SettingsContent() {
       title: "Security",
       icon: Shield,
       items: [
-        { name: "Two-Factor Authentication", description: "Add an extra layer of security", icon: Key },
         { name: "Connected Wallets", description: "Manage your linked wallets", icon: Wallet },
         { name: "Activity Log", description: "Review your account activity", icon: ChevronRight }
       ]

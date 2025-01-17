@@ -48,7 +48,7 @@ export default function SettingsContent() {
       items: [
         { name: "Profile Information", description: "Update your personal details", icon: User },
         { name: "Email Settings", description: "Manage your email preferences", icon: Mail },
-        { name: "Password & Security", description: "Keep your account secure", icon: Lock }
+        { name: "Password Management", description: "Keep your account secure", icon: Lock }
       ]
     },
     {

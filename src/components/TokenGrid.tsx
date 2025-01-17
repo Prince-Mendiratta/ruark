@@ -120,6 +120,7 @@ export default function TokenGrid() {
         </motion.div>
       ))}
     </div>
+    </div>
     
     <TokenReplaceModal
       isOpen={isReplaceModalOpen}

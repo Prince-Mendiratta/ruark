@@ -23,33 +23,33 @@ const sampleActivities: ActivityLogEntry[] = [
   {
     id: "1",
     timestamp: new Date(2024, 0, 15, 14, 30),
-    type: "wallet_add",
+    type: "wallet_add" as const,
     description: "Added new wallet to account",
     walletAddress: "0.0.847264"
   },
   {
     id: "2",
     timestamp: new Date(2024, 0, 15, 12, 15),
-    type: "account_update",
+    type: "account_update" as const,
     description: "Updated profile information"
   },
   {
     id: "3",
     timestamp: new Date(2024, 0, 14, 16, 45),
-    type: "wallet_remove",
+    type: "wallet_remove" as const,
     description: "Removed wallet from account",
     walletAddress: "0.0.123456"
   },
   {
     id: "4",
     timestamp: new Date(2024, 0, 14, 10, 20),
-    type: "security_update",
+    type: "security_update" as const,
     description: "Changed account password"
   },
   {
     id: "5",
     timestamp: new Date(2024, 0, 13, 9, 30),
-    type: "other",
+    type: "other" as const,
     description: "Updated notification preferences"
   }
 ].sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime());

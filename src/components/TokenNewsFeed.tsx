@@ -49,47 +49,48 @@ export default function TokenNewsFeed() {
     <div className="mt-8">
       <div className="mb-6 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Newspaper className="h-5 w-5 text-primary" />
-          <h2 className="text-xl font-semibold">Latest News</h2>
+          <Newspaper className="h-4 w-4 md:h-5 md:w-5 text-primary" />
+          <h2 className="text-lg md:text-xl font-semibold">Latest News</h2>
         </div>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-0 md:space-y-4">
         <AnimatePresence mode="popLayout">
           {sampleNews.slice(0, visibleNews).map((news, index) => (
-            <motion.div
+            <motion.a
+              href={news.url}
+              target="_blank"
+              rel="noopener noreferrer"
               key={news.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
-              className="group relative overflow-hidden rounded-lg border bg-card p-6 transition-all hover:bg-muted/50"
+              className="group block relative overflow-hidden rounded-lg border bg-card transition-all 
+                hover:bg-muted/50 active:bg-muted/70 hover:border-primary/20
+                md:p-6 p-4 mb-4 last:mb-0
+                motion-safe:hover:scale-[1.01] motion-safe:active:scale-[0.99]"
             >
-              <div className="flex items-start justify-between gap-4">
+              <div className="flex items-start gap-4">
                 <div className="flex-1 space-y-2">
-                  <h3 className="font-medium leading-snug">
+                  <h3 className="font-medium leading-snug text-base md:text-lg">
                     {news.headline}
                   </h3>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground">
                     <span>{news.source}</span>
                     <span className="inline-block h-1 w-1 rounded-full bg-muted-foreground/50" />
                     <span>{news.date}</span>
                   </div>
-                  <p className="text-sm text-muted-foreground line-clamp-2">
+                  <p className="text-xs md:text-sm text-muted-foreground line-clamp-2 leading-relaxed">
                     {news.summary}
                   </p>
                 </div>
-                <a
-                  href={news.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-1 flex items-center gap-1 text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100"
-                >
+                <div className="hidden md:flex items-center gap-1 text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
                   Read More
                   <ExternalLink className="h-4 w-4" />
-                </a>
+                </div>
               </div>
-            </motion.div>
+            </motion.a>
           ))}
         </AnimatePresence>
       </div>

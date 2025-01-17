@@ -89,7 +89,7 @@ export default function WalletsPage() {
                 exit={{ opacity: 0, height: 0 }}
                 className="text-destructive text-sm"
               >
-                {error.message}
+                {error}
               </motion.p>
             )}
             {success && (

@@ -114,7 +114,7 @@ export default function ProfileEditModal({
               exit={{ opacity: 0, height: 0 }}
               className="mb-4 p-4 bg-destructive/10 border-l-4 border-destructive rounded text-sm text-destructive"
             >
-              {error}
+              {error.message}
             </motion.div>
           )}
         </AnimatePresence>

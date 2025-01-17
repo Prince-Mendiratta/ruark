@@ -19,6 +19,13 @@ import {
 import { useState } from "react";
 import SparkBorder from "./SparkBorder";
 import ProfileEditModal from "./ProfileEditModal";
+import EmailSettingsModal from "./EmailSettingsModal";
+
+interface EmailSettings {
+  email: string;
+  marketingEmails: boolean;
+  alertEmails: boolean;
+}
 
 export default function SettingsContent() {
   const [userData, setUserData] = useState({
@@ -204,7 +211,7 @@ export default function SettingsContent() {
         isOpen={isEmailModalOpen}
         onClose={() => setIsEmailModalOpen(false)}
         initialEmail={userData.email}
-        onSave={async (settings) => {
+        onSave={async (settings: EmailSettings) => {
           await new Promise(resolve => setTimeout(resolve, 1000));
           setUserData(prev => ({
             ...prev,

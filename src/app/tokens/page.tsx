@@ -362,6 +362,9 @@ export default function TokensPage() {
                       </div>
 
                       <div className="flex-shrink-0 flex items-center gap-2">
+                      </div>
+                    </div>
+                  </div>
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}

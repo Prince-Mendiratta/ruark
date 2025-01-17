@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { LayoutDashboard, Wallet, ArrowLeftRight, Settings, Menu, X, HelpCircle, LogOut, LogIn } from "lucide-react";
 import { useAuthStore } from "@/lib/store/authStore";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import ProfileEditModal from "@/components/ProfileEditModal";
 

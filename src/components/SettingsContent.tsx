@@ -21,6 +21,7 @@ import SparkBorder from "./SparkBorder";
 import ProfileEditModal from "./ProfileEditModal";
 import EmailSettingsModal from "./EmailSettingsModal";
 import PasswordEditModal from "./PasswordEditModal";
+import PreferencesModal from "./PreferencesModal";
 
 interface EmailSettings {
   email: string;
@@ -39,7 +40,13 @@ export default function SettingsContent() {
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useState<"light" | "dark">(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') as "light" | "dark" || "light";
+    }
+    return "light";
+  });
+  const [isPreferencesModalOpen, setIsPreferencesModalOpen] = useState(false);
 
   const settingSections = [
     {
@@ -172,6 +179,8 @@ export default function SettingsContent() {
                       setIsEmailModalOpen(true);
                     } else if (item.name === "Password Management") {
                       setIsPasswordModalOpen(true);
+                    } else if (["Appearance", "Language", "Notifications"].includes(item.name)) {
+                      setIsPreferencesModalOpen(true);
                     }
                   }}
                 >
@@ -208,6 +217,17 @@ export default function SettingsContent() {
             name: data.name,
             avatar: data.image
           }));
+        }}
+      />
+
+      <PreferencesModal
+        isOpen={isPreferencesModalOpen}
+        onClose={() => setIsPreferencesModalOpen(false)}
+        theme={theme}
+        onThemeChange={(newTheme) => {
+          setTheme(newTheme);
+          localStorage.setItem('theme', newTheme);
+          document.documentElement.classList.toggle('dark', newTheme === 'dark');
         }}
       />
 

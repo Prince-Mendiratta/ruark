@@ -29,6 +29,7 @@ export default function SettingsContent() {
   });
 
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
   const settingSections = [
@@ -158,6 +159,8 @@ export default function SettingsContent() {
                   onClick={() => {
                     if (item.name === "Profile Information") {
                       setIsProfileModalOpen(true);
+                    } else if (item.name === "Email Settings") {
+                      setIsEmailModalOpen(true);
                     }
                   }}
                 >
@@ -193,6 +196,19 @@ export default function SettingsContent() {
             ...prev,
             name: data.name,
             avatar: data.image
+          }));
+        }}
+      />
+
+      <EmailSettingsModal
+        isOpen={isEmailModalOpen}
+        onClose={() => setIsEmailModalOpen(false)}
+        initialEmail={userData.email}
+        onSave={async (settings) => {
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          setUserData(prev => ({
+            ...prev,
+            email: settings.email
           }));
         }}
       />

@@ -88,16 +88,18 @@ export default function Navigation() {
               <HelpCircle className="h-4 w-4" />
               <span>Help & Documentation</span>
             </button>
-            <button 
-              onClick={() => {
-                logout();
-                setIsOpen(false);
-              }}
-              className="w-full flex items-center gap-3 rounded-lg px-4 py-2 text-sm font-medium text-destructive hover:bg-destructive/10 transition-colors mt-2"
-            >
-              <LogOut className="h-4 w-4" />
-              <span>Sign Out</span>
-            </button>
+            {isAuthenticated && (
+              <button 
+                onClick={() => {
+                  logout();
+                  setIsOpen(false);
+                }}
+                className="w-full flex items-center gap-3 rounded-lg px-4 py-2 text-sm font-medium text-destructive hover:bg-destructive/10 transition-colors mt-2"
+              >
+                <LogOut className="h-4 w-4" />
+                <span>Sign Out</span>
+              </button>
+            )}
 
             {/* Profile Edit Modal */}
             <ProfileEditModal

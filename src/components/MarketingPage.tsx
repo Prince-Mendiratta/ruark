@@ -43,7 +43,7 @@ export default function MarketingPage() {
         >
           <div className="mx-auto max-w-4xl text-center">
             <motion.h1 
-              className="mb-6 text-5xl font-bold tracking-tight"
+              className="mb-6 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -52,7 +52,7 @@ export default function MarketingPage() {
               <span className="bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent"> with Confidence</span>
             </motion.h1>
             <motion.p 
-              className="mb-10 text-xl text-muted-foreground"
+              className="mb-8 sm:mb-10 text-lg sm:text-xl text-muted-foreground"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
@@ -91,9 +91,9 @@ export default function MarketingPage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-24">
+      <section id="features" className="py-16 sm:py-24">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
@@ -128,7 +128,7 @@ export default function MarketingPage() {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
               {benefits.map((benefit, index) => (
                 <motion.div
                   key={benefit}

@@ -16,9 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={GeistSans.variable}>
-      <body className="min-h-screen bg-background antialiased">
+      <body className="min-h-screen bg-background antialiased overflow-x-hidden">
         <Navigation />
-        <main className="md:pl-64">
+        <main className="pt-16 md:pt-0 md:pl-64">
           {children}
         </main>
       </body>

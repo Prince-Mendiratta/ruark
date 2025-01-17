@@ -110,7 +110,9 @@ export default function TokenGrid() {
                 </div>
               </div>
 
-              <TokenPriceChart positive={token.positive} />
+              <div className="relative overflow-hidden border-t border-border/10 mt-4 pt-4">
+                <TokenPriceChart positive={token.positive} />
+              </div>
               
               <div className="flex justify-end">
                 <div className="flex items-center gap-2">

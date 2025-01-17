@@ -32,12 +32,12 @@ export default function TokenPriceChart({ positive }: TokenPriceChartProps) {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="h-28 sm:h-32 w-full"
+      className="h-28 sm:h-32 w-full relative overflow-hidden"
     >
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart
           data={data}
-          margin={{ top: 5, right: 0, left: 0, bottom: 5 }}
+          margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
         >
           <defs>
             <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">

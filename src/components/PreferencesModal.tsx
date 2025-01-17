@@ -36,9 +36,30 @@ export default function PreferencesModal({
     // Load preferences from localStorage
     const savedPreferences = localStorage.getItem('userPreferences');
     if (savedPreferences) {
-      const { thresholds: savedThresholds, customThreshold: savedCustom } = JSON.parse(savedPreferences);
-      setThresholds(savedThresholds);
-      setCustomThreshold(savedCustom);
+      try {
+        const data = JSON.parse(savedPreferences);
+        if (data && typeof data === 'object') {
+          if ('thresholds' in data && typeof data.thresholds === 'object') {
+            // Validate the thresholds structure
+            const savedThresholds = Object.entries(data.thresholds).reduce((acc, [key, value]) => {
+              if (typeof value === 'object' && value !== null && 
+                  'value' in value && typeof value.value === 'number' &&
+                  'enabled' in value && typeof value.enabled === 'boolean') {
+                acc[key] = value as NotificationThreshold;
+              }
+              return acc;
+            }, {} as Record<string, NotificationThreshold>);
+            
+            setThresholds(savedThresholds);
+          }
+          
+          if ('customThreshold' in data && typeof data.customThreshold === 'number') {
+            setCustomThreshold(data.customThreshold);
+          }
+        }
+      } catch (error) {
+        console.error('Failed to parse preferences:', error);
+      }
     }
   }, []);
 
@@ -50,10 +71,18 @@ export default function PreferencesModal({
   };
 
   const handleThresholdToggle = (key: string) => {
-    setThresholds(prev => ({
-      ...prev,
-      [key]: { ...prev[key], enabled: !prev[key].enabled }
-    }));
+    setThresholds(prev => {
+      const threshold = prev[key];
+      if (!threshold) return prev;
+      
+      return {
+        ...prev,
+        [key]: {
+          ...threshold,
+          enabled: !threshold.enabled
+        }
+      };
+    });
   };
 
   return (

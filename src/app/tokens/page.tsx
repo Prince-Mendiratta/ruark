@@ -330,37 +330,38 @@ export default function TokensPage() {
                   </div>
 
                   {/* Price Info */}
-                  <div className="flex flex-1 items-center justify-end gap-8">
-                    <div>
-                      <p className="text-sm font-medium text-muted-foreground">Price</p>
-                      <p className="mt-1 text-2xl font-bold">${token.price.toFixed(4)}</p>
-                      <div
-                        className={`mt-1 flex items-center gap-1 ${
-                          token.priceChange24h >= 0 ? "text-green-500" : "text-red-500"
-                        }`}
-                      >
-                        {token.priceChange24h >= 0 ? (
-                          <ArrowUpRight className="h-4 w-4" />
-                        ) : (
-                          <ArrowDownRight className="h-4 w-4" />
-                        )}
-                        <span className="font-medium">{Math.abs(token.priceChange24h)}%</span>
+                  <div className="flex-1 overflow-x-auto">
+                    <div className="flex items-center justify-end gap-8 min-w-[600px] pr-4">
+                      <div className="flex-shrink-0">
+                        <p className="text-sm font-medium text-muted-foreground">Price</p>
+                        <p className="mt-1 text-2xl font-bold">${token.price.toFixed(4)}</p>
+                        <div
+                          className={`mt-1 flex items-center gap-1 ${
+                            token.priceChange24h >= 0 ? "text-green-500" : "text-red-500"
+                          }`}
+                        >
+                          {token.priceChange24h >= 0 ? (
+                            <ArrowUpRight className="h-4 w-4" />
+                          ) : (
+                            <ArrowDownRight className="h-4 w-4" />
+                          )}
+                          <span className="font-medium">{Math.abs(token.priceChange24h)}%</span>
+                        </div>
                       </div>
-                    </div>
 
-                    <div>
-                      <p className="text-sm font-medium text-muted-foreground">Market Cap</p>
-                      <p className="mt-1 text-xl font-semibold">{formatNumber(token.marketCap)}</p>
-                      <p className="mt-1 text-sm text-muted-foreground">
-                        Vol: {formatNumber(token.volume24h)}
-                      </p>
-                    </div>
+                      <div className="flex-shrink-0">
+                        <p className="text-sm font-medium text-muted-foreground">Market Cap</p>
+                        <p className="mt-1 text-xl font-semibold">{formatNumber(token.marketCap)}</p>
+                        <p className="mt-1 text-sm text-muted-foreground">
+                          Vol: {formatNumber(token.volume24h)}
+                        </p>
+                      </div>
 
-                    <div className="h-20 w-48">
-                      <TokenPriceChart positive={token.priceChange24h >= 0} />
-                    </div>
+                      <div className="flex-shrink-0 h-20 w-48">
+                        <TokenPriceChart positive={token.priceChange24h >= 0} />
+                      </div>
 
-                    <div className="flex items-center gap-2">
+                      <div className="flex-shrink-0 flex items-center gap-2">
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}

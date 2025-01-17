@@ -18,13 +18,14 @@ import {
 import { useState } from "react";
 import SparkBorder from "@/components/SparkBorder";
 
-// Placeholder user data
-const userData = {
+const [userData, setUserData] = useState({
   name: "Alex Thompson",
   email: "alex@example.com",
   avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=128&h=128&fit=crop",
   joinDate: "January 2024"
-};
+});
+
+const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
 const settingSections = [
   {
@@ -92,6 +93,7 @@ export default function SettingsPage() {
               </div>
             </div>
             <button 
+              onClick={() => setIsProfileModalOpen(true)}
               className="px-4 py-2 text-sm font-medium text-primary hover:text-primary/90 transition-colors"
             >
               Edit Profile

@@ -76,6 +76,29 @@ export default function Navigation() {
               <LogOut className="h-4 w-4" />
               <span>Sign Out</span>
             </button>
+
+            {/* Profile Edit Modal */}
+            <ProfileEditModal
+              isOpen={isProfileModalOpen}
+              onClose={() => setIsProfileModalOpen(false)}
+              initialData={{
+                name: userData.name,
+                image: userData.avatar,
+                twitter: "",
+                calaxy: ""
+              }}
+              onSave={async (data) => {
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                console.log('Saving profile data:', data);
+                // Update local user data
+                setUserData(prev => ({
+                  ...prev,
+                  name: data.name,
+                  avatar: data.image
+                }));
+              }}
+            />
           </div>
         </div>
       </nav>

@@ -44,9 +44,13 @@ const validatePassword = (password: string): PasswordStrength => {
     { score: 5, label: "Very Strong", color: "bg-green-600" }
   ];
 
-  // Clamp the score to valid array indices to ensure we always return a valid strength
+  // Ensure we always return a valid strength by clamping the score
   const clampedScore = Math.min(Math.max(score, 0), strengths.length - 1);
-  return strengths[clampedScore];
+  const strength = strengths[clampedScore];
+  if (!strength) {
+    return strengths[0]; // Fallback to "Very Weak" if something goes wrong
+  }
+  return strength;
 };
 
 export default function PasswordEditModal({

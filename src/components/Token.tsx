@@ -31,26 +31,26 @@ export default function Token({ token, onReplace, onTrack }: TokenProps) {
       whileHover={{ scale: 1.02 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      className="relative overflow-hidden rounded-xl border bg-card p-6 transition-shadow hover:shadow-lg"
+      className="relative overflow-hidden rounded-xl border bg-card p-4 sm:p-6 transition-shadow hover:shadow-lg"
       role="article"
       aria-label={`${token.name} token details`}
     >
       <div className="flex flex-col space-y-6">
         {/* Header Section */}
         <div className="flex items-start justify-between">
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
             <img 
               src={token.image} 
               alt={token.name}
-              className="h-14 w-14 rounded-full ring-2 ring-border object-cover"
+              className="h-12 w-12 sm:h-14 sm:w-14 rounded-full ring-2 ring-border object-cover"
               loading="lazy"
             />
             <div>
-              <h3 className="text-xl font-semibold">{token.name}</h3>
-              <p className="text-sm text-muted-foreground font-mono">{token.id}</p>
+              <h3 className="text-lg sm:text-xl font-semibold">{token.name}</h3>
+              <p className="text-xs sm:text-sm text-muted-foreground font-mono truncate max-w-[180px] sm:max-w-none">{token.id}</p>
             </div>
           </div>
-          <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full ${
+          <div className={`hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full ${
             token.positive ? 'bg-green-500/10 text-green-500' : 'bg-red-500/10 text-red-500'
           }`}>
             <TrendingUp className="h-4 w-4" />
@@ -59,14 +59,14 @@ export default function Token({ token, onReplace, onTrack }: TokenProps) {
         </div>
 
         {/* Price & Balance Section */}
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 gap-3 sm:gap-6">
           <div className="space-y-2">
             <p className="text-sm text-muted-foreground">Balance</p>
-            <p className="text-xl font-semibold">{token.balance}</p>
+            <p className="text-base sm:text-xl font-semibold">{token.balance}</p>
           </div>
           <div className="space-y-2">
             <p className="text-sm text-muted-foreground">Value</p>
-            <p className="text-xl font-semibold">{token.value}</p>
+            <p className="text-base sm:text-xl font-semibold">{token.value}</p>
           </div>
         </div>
 
@@ -75,23 +75,23 @@ export default function Token({ token, onReplace, onTrack }: TokenProps) {
           <div className="flex items-baseline justify-between">
             <p className="text-sm text-muted-foreground">Current Price</p>
             <div className="flex items-center gap-2">
-              <span className="text-2xl font-bold">{token.price}</span>
+              <span className="text-xl sm:text-2xl font-bold">{token.price}</span>
               <DollarSign className="h-4 w-4 text-muted-foreground" />
             </div>
           </div>
           
-          <div className="relative h-24 w-full">
+          <div className="relative h-16 sm:h-24 w-full">
             <TokenPriceChart positive={token.positive} />
           </div>
         </div>
 
         {/* Actions */}
-        <div className="flex justify-end gap-2">
+        <div className="flex justify-end gap-1 sm:gap-2">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => onTrack(token.id)}
-            className={`p-2.5 rounded-full transition-colors ${
+            className={`p-2 sm:p-2.5 rounded-full transition-colors ${
               token.isTracked 
                 ? "bg-primary/10 text-primary" 
                 : "hover:bg-primary/10 text-muted-foreground hover:text-primary"

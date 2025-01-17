@@ -44,7 +44,8 @@ const validatePassword = (password: string): PasswordStrength => {
     { score: 5, label: "Very Strong", color: "bg-green-600" }
   ];
 
-  return strengths[score];
+  // Ensure we always return a valid strength object
+  return strengths[score] || strengths[0];
 };
 
 export default function PasswordEditModal({

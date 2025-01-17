@@ -19,16 +19,17 @@ import { useState } from "react";
 import SparkBorder from "@/components/SparkBorder";
 import ProfileEditModal from "@/components/ProfileEditModal";
 
-const [userData, setUserData] = useState({
-  name: "Alex Thompson",
-  email: "alex@example.com",
-  avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=128&h=128&fit=crop",
-  joinDate: "January 2024"
-});
+export default function SettingsPage() {
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [userData, setUserData] = useState({
+    name: "Alex Thompson",
+    email: "alex@example.com",
+    avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=128&h=128&fit=crop",
+    joinDate: "January 2024"
+  });
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
-const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
-
-const settingSections = [
+  const settingSections = [
   {
     title: "Account",
     icon: User,
@@ -57,9 +58,6 @@ const settingSections = [
     ]
   }
 ];
-
-export default function SettingsPage() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
 
   return (
     <div className="container mx-auto max-w-7xl px-3 sm:px-4 py-6 sm:py-8">

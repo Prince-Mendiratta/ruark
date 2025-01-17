@@ -14,7 +14,8 @@ import {
   Sun, 
   User,
   Wallet,
-  LogOut
+  LogOut,
+  Activity
 } from "lucide-react";
 import { useState } from "react";
 import SparkBorder from "./SparkBorder";
@@ -22,6 +23,7 @@ import ProfileEditModal from "./ProfileEditModal";
 import EmailSettingsModal from "./EmailSettingsModal";
 import PasswordEditModal from "./PasswordEditModal";
 import PreferencesModal from "./PreferencesModal";
+import ActivityLogModal from "./ActivityLogModal";
 
 interface EmailSettings {
   email: string;
@@ -47,6 +49,7 @@ export default function SettingsContent() {
     return "light";
   });
   const [isPreferencesModalOpen, setIsPreferencesModalOpen] = useState(false);
+  const [isActivityLogModalOpen, setIsActivityLogModalOpen] = useState(false);
 
   const settingSections = [
     {
@@ -72,7 +75,7 @@ export default function SettingsContent() {
       icon: Shield,
       items: [
         { name: "Connected Wallets", description: "Manage your linked wallets", icon: Wallet },
-        { name: "Activity Log", description: "Review your account activity", icon: ChevronRight }
+        { name: "Activity Log", description: "Review your account activity", icon: Activity }
       ]
     }
   ];
@@ -182,6 +185,8 @@ export default function SettingsContent() {
                       setIsPreferencesModalOpen(true);
                     } else if (item.name === "Connected Wallets") {
                       window.location.href = "/wallets";
+                    } else if (item.name === "Activity Log") {
+                      setIsActivityLogModalOpen(true);
                     }
                   }}
                 >
@@ -253,6 +258,11 @@ export default function SettingsContent() {
             email: settings.email
           }));
         }}
+      />
+
+      <ActivityLogModal
+        isOpen={isActivityLogModalOpen}
+        onClose={() => setIsActivityLogModalOpen(false)}
       />
     </div>
   );

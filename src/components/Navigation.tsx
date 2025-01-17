@@ -148,7 +148,7 @@ export default function Navigation() {
               </div>
               <div className="flex flex-col h-[calc(100%-80px)]">
                 <div className="space-y-2">
-                  {navItems.map((item) => (
+                  {authenticatedNavItems.map((item) => (
                     <NavItem 
                       key={item.href} 
                       item={item} 
@@ -190,7 +190,7 @@ export default function Navigation() {
 }
 
 function NavItem({ item, isActive, onClick }: { 
-  item: typeof navItems[number], 
+  item: typeof authenticatedNavItems[number], 
   isActive: boolean,
   onClick?: () => void 
 }) {

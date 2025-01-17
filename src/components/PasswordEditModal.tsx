@@ -170,7 +170,7 @@ export default function PasswordEditModal({
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="mb-6 p-4 bg-destructive/10 border-l-4 border-destructive rounded"
+              className="mb-6 p-4 bg-destructive/5 border border-destructive/10 shadow-sm rounded-lg"
             >
               <p className="text-sm text-destructive">{error}</p>
             </motion.div>
@@ -180,7 +180,7 @@ export default function PasswordEditModal({
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="mb-6 p-4 bg-green-500/10 border-l-4 border-green-500 rounded"
+              className="mb-6 p-4 bg-green-500/5 border border-green-500/10 shadow-sm rounded-lg"
             >
               <div className="flex items-center gap-2">
                 <Check className="w-4 h-4 text-green-500" />
@@ -202,12 +202,12 @@ export default function PasswordEditModal({
                 type={showPasswords.current ? "text" : "password"}
                 value={passwords.currentPassword}
                 onChange={(e) => handlePasswordChange("currentPassword", e.target.value)}
-                className="w-full pl-10 pr-10 py-2 bg-background border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20"
+                className="w-full pl-10 pr-10 py-3 bg-background border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 transition-shadow hover:border-primary/20"
               />
               <button
                 type="button"
                 onClick={() => togglePasswordVisibility("current")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
               >
                 {showPasswords.current ? (
                   <EyeOff className="w-4 h-4" />
@@ -247,7 +247,7 @@ export default function PasswordEditModal({
             {/* Password Strength Indicator */}
             {passwords.newPassword && (
               <div className="mt-2">
-                <div className="h-1 w-full bg-muted rounded-full overflow-hidden">
+                <div className="h-2 w-full bg-muted/30 rounded-full overflow-hidden backdrop-blur-sm">
                   <motion.div
                     className={`h-full ${passwordStrength.color}`}
                     initial={{ width: 0 }}
@@ -294,14 +294,14 @@ export default function PasswordEditModal({
       <div className="flex items-center justify-end gap-3 p-4 border-t bg-muted/50">
         <button
           onClick={onClose}
-          className="px-4 py-2 text-sm font-medium hover:bg-accent rounded-lg transition-colors"
+          className="px-4 py-2.5 text-sm font-medium hover:bg-accent/80 rounded-lg transition-all hover:shadow-sm active:scale-[0.98]"
         >
           Cancel
         </button>
         <button
           onClick={handleSubmit}
           disabled={!passwords.currentPassword || !passwords.newPassword || !passwords.confirmPassword || isLoading}
-          className="flex items-center gap-2 px-4 py-2 text-sm font-medium bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50"
+          className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all hover:shadow-md active:scale-[0.98] disabled:opacity-50 disabled:hover:shadow-none disabled:active:scale-100"
         >
           {isLoading ? (
             <>

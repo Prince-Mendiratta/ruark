@@ -46,7 +46,8 @@ const validatePassword = (password: string): PasswordStrength => {
 
   // Ensure we always return a valid strength by clamping the score
   const clampedScore = Math.min(Math.max(score, 0), strengths.length - 1);
-  return strengths[clampedScore];
+  // TypeScript needs a non-null assertion here since we know the index is valid
+  return strengths[clampedScore]!;
 };
 
 export default function PasswordEditModal({

@@ -13,7 +13,7 @@ import {
   Twitter,
   MessageCircle,
   Globe,
-  Discord2
+  MessageSquare
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import TokenPriceChart from "@/components/TokenPriceChart";
@@ -283,7 +283,7 @@ export default function TokensPage() {
                       rel="noopener noreferrer"
                       className="text-muted-foreground hover:text-primary transition-colors"
                     >
-                      <Discord2 className="h-4 w-4" />
+                      <MessageSquare className="h-4 w-4" />
                     </a>
                   )}
                   <a

@@ -1,9 +1,14 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, Loader2, Upload, X } from "lucide-react";
+import { Check, Loader2, Upload } from "lucide-react";
 import { useState } from "react";
 import Modal from "./Modal";
+
+interface ValidationError {
+  field: 'name' | 'image' | 'twitter' | 'calaxy';
+  message: string;
+}
 
 interface ProfileData {
   name: string;
@@ -27,44 +32,42 @@ export default function ProfileEditModal({
 }: ProfileEditModalProps) {
   const [formData, setFormData] = useState<ProfileData>(initialData);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<ValidationError | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
   const [imagePreview, setImagePreview] = useState(initialData.image);
 
-  const validateForm = () => {
+  const validateForm = (): ValidationError | null => {
     if (!formData.name.trim()) {
-      setError("Name is required");
-      return false;
+      return { field: 'name', message: "Name is required" };
     }
     if (formData.name.length > 50) {
-      setError("Name must be less than 50 characters");
-      return false;
+      return { field: 'name', message: "Name must be less than 50 characters" };
     }
     if (formData.twitter && !formData.twitter.match(/^@?[a-zA-Z0-9_]{1,15}$/)) {
-      setError("Invalid Twitter username format");
-      return false;
+      return { field: 'twitter', message: "Invalid Twitter username format" };
     }
     if (formData.calaxy && !formData.calaxy.match(/^[a-zA-Z0-9_-]{3,30}$/)) {
-      setError("Invalid Calaxy username format");
-      return false;
+      return { field: 'calaxy', message: "Invalid Calaxy username format (3-30 characters, letters, numbers, - and _)" };
     }
-    return true;
+    return null;
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       if (!file.type.startsWith('image/')) {
-        setError("Please upload an image file");
+        setError({ field: 'image', message: "Please upload an image file" });
         return;
       }
       if (file.size > 5 * 1024 * 1024) {
-        setError("Image must be less than 5MB");
+        setError({ field: 'image', message: "Image must be less than 5MB" });
         return;
       }
       const reader = new FileReader();
       reader.onloadend = () => {
         setImagePreview(reader.result as string);
         setFormData(prev => ({ ...prev, image: reader.result as string }));
+        setError(null);
       };
       reader.readAsDataURL(file);
     }
@@ -72,14 +75,24 @@ export default function ProfileEditModal({
 
   const handleSubmit = async () => {
     setError(null);
-    if (!validateForm()) return;
+    setSuccess(null);
+    
+    const validationError = validateForm();
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
 
     setIsLoading(true);
     try {
       await onSave(formData);
-      onClose();
+      setSuccess("Profile updated successfully!");
+      setTimeout(() => {
+        onClose();
+        setSuccess(null);
+      }, 1500);
     } catch (err) {
-      setError("Failed to save changes. Please try again.");
+      setError({ field: 'name', message: "Failed to save changes. Please try again." });
     } finally {
       setIsLoading(false);
     }

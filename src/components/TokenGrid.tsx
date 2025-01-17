@@ -14,6 +14,7 @@ interface Token {
   value: string;
   image: string;
   positive: boolean;
+  change?: string;
 }
 
 const tokens: Token[] = [
@@ -24,7 +25,8 @@ const tokens: Token[] = [
     price: "$0.07",
     value: "$86.42",
     image: "https://images.unsplash.com/photo-1622630998477-20aa696ecb05?w=128&h=128&fit=crop",
-    positive: true
+    positive: true,
+    change: "+5.2%"
   },
   {
     id: "0.0.7654321",
@@ -33,7 +35,8 @@ const tokens: Token[] = [
     price: "$1.00",
     value: "$500.00",
     image: "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?w=128&h=128&fit=crop",
-    positive: false
+    positive: false,
+    change: "-0.1%"
   },
   {
     id: "0.0.9876543",
@@ -42,7 +45,8 @@ const tokens: Token[] = [
     price: "$0.08",
     value: "$800.00",
     image: "https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?w=128&h=128&fit=crop",
-    positive: true
+    positive: true,
+    change: "+3.8%"
   }
 ];
 

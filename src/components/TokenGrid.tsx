@@ -1,8 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { TrendingUp, ArrowUpRight, DollarSign } from "lucide-react";
+import { TrendingUp, ArrowUpRight, DollarSign, Replace } from "lucide-react";
+import { useState } from "react";
 import TokenPriceChart from "./TokenPriceChart";
+import TokenReplaceModal from "./TokenReplaceModal";
 
 const tokens = [
   {
@@ -38,6 +40,14 @@ const tokens = [
 ];
 
 export default function TokenGrid() {
+  const [selectedTokenId, setSelectedTokenId] = useState<string | null>(null);
+  const [isReplaceModalOpen, setIsReplaceModalOpen] = useState(false);
+
+  const handleReplaceToken = (newToken: any) => {
+    // In a real app, update the tokens array with the new token
+    console.log("Replacing token:", newToken);
+  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
       {tokens.map((token) => (
@@ -91,13 +101,34 @@ export default function TokenGrid() {
             <TokenPriceChart positive={token.positive} />
             
             <div className="flex justify-end">
-              <button className="p-2 hover:bg-accent rounded-full transition-colors">
-                <ArrowUpRight className="w-5 h-5" />
-              </button>
+              <div className="flex items-center gap-2">
+                <button 
+                  onClick={() => {
+                    setSelectedTokenId(token.id);
+                    setIsReplaceModalOpen(true);
+                  }}
+                  className="p-2 hover:bg-accent rounded-full transition-colors"
+                >
+                  <Replace className="w-5 h-5" />
+                </button>
+                <button className="p-2 hover:bg-accent rounded-full transition-colors">
+                  <ArrowUpRight className="w-5 h-5" />
+                </button>
+              </div>
             </div>
           </div>
         </motion.div>
       ))}
     </div>
+    
+    <TokenReplaceModal
+      isOpen={isReplaceModalOpen}
+      onClose={() => {
+        setIsReplaceModalOpen(false);
+        setSelectedTokenId(null);
+      }}
+      onReplace={handleReplaceToken}
+      currentTokenId={selectedTokenId || ""}
+    />
   );
 }

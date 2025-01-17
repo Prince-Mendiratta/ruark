@@ -5,6 +5,7 @@ import { LayoutDashboard, Wallet, ArrowLeftRight, Settings, Menu, X, HelpCircle,
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import ProfileEditModal from "@/components/ProfileEditModal";
 
 const navItems = [
   {
@@ -32,6 +33,12 @@ const navItems = [
 export default function Navigation() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const [userData, setUserData] = useState({
+    name: "Demo User",
+    email: "demo@example.com", 
+    avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=128&h=128&fit=crop"
+  });
 
   return (
     <>

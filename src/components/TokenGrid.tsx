@@ -56,83 +56,84 @@ export default function TokenGrid() {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-      {tokens.map((token) => (
-        <motion.div
-          key={token.id}
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          whileHover={{ scale: 1.02 }}
-          className="bg-card p-4 sm:p-6 rounded-lg shadow-sm border"
-        >
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2 sm:gap-3">
-              <img 
-                src={token.image} 
-                alt={token.name}
-                className="w-10 h-10 sm:w-12 sm:h-12 rounded-full ring-2 ring-border"
-              />
-              <div>
-                <h3 className="font-semibold text-lg">{token.name}</h3>
-                <p className="text-sm text-muted-foreground font-mono">{token.id}</p>
+    <div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+        {tokens.map((token) => (
+          <motion.div
+            key={token.id}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            whileHover={{ scale: 1.02 }}
+            className="bg-card p-4 sm:p-6 rounded-lg shadow-sm border"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <img 
+                  src={token.image} 
+                  alt={token.name}
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full ring-2 ring-border"
+                />
+                <div>
+                  <h3 className="font-semibold text-lg">{token.name}</h3>
+                  <p className="text-sm text-muted-foreground font-mono">{token.id}</p>
+                </div>
               </div>
-            </div>
-            <div className={`flex items-center gap-1 ${
-              token.positive ? 'text-green-500' : 'text-red-500'
-            } px-3 py-1 rounded-full bg-secondary`}>
-              <TrendingUp className="w-4 h-4" />
-              <span className="text-sm font-medium">{token.change}</span>
-            </div>
-          </div>
-          
-          <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <p className="text-sm text-muted-foreground mb-1">Balance</p>
-                <p className="text-base sm:text-lg font-semibold">{token.balance}</p>
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground mb-1">Value</p>
-                <p className="text-lg font-semibold">{token.value}</p>
+              <div className={`flex items-center gap-1 ${
+                token.positive ? 'text-green-500' : 'text-red-500'
+              } px-3 py-1 rounded-full bg-secondary`}>
+                <TrendingUp className="w-4 h-4" />
+                <span className="text-sm font-medium">{token.change}</span>
               </div>
             </div>
             
-            <div>
-              <p className="text-sm text-muted-foreground mb-1">Price</p>
-              <div className="flex items-center gap-2">
-                <span className="text-2xl font-bold">{token.price}</span>
-                <DollarSign className="w-4 h-4 text-muted-foreground" />
+            <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <p className="text-sm text-muted-foreground mb-1">Balance</p>
+                  <p className="text-base sm:text-lg font-semibold">{token.balance}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground mb-1">Value</p>
+                  <p className="text-lg font-semibold">{token.value}</p>
+                </div>
               </div>
-            </div>
+              
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">Price</p>
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl font-bold">{token.price}</span>
+                  <DollarSign className="w-4 h-4 text-muted-foreground" />
+                </div>
+              </div>
 
-            <TokenPriceChart positive={token.positive} />
-            
-            <div className="flex justify-end">
-              <div className="flex items-center gap-2">
-                <button 
-                  onClick={() => {
-                    setSelectedTokenId(token.id);
-                    setIsReplaceModalOpen(true);
-                  }}
-                  className="p-2 hover:bg-accent rounded-full transition-colors"
-                >
-                  <Replace className="w-5 h-5" />
-                </button>
-                <button className="p-2 hover:bg-accent rounded-full transition-colors">
-                  <ArrowUpRight className="w-5 h-5" />
-                </button>
+              <TokenPriceChart positive={token.positive} />
+              
+              <div className="flex justify-end">
+                <div className="flex items-center gap-2">
+                  <button 
+                    onClick={() => {
+                      setSelectedTokenId(token.id);
+                      setIsReplaceModalOpen(true);
+                    }}
+                    className="p-2 hover:bg-accent rounded-full transition-colors"
+                  >
+                    <Replace className="w-5 h-5" />
+                  </button>
+                  <button className="p-2 hover:bg-accent rounded-full transition-colors">
+                    <ArrowUpRight className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </motion.div>
-      ))}
+          </motion.div>
+        ))}
       </div>
+
       <TokenReplaceModal
         isOpen={isReplaceModalOpen}
         onClose={() => {
           setIsReplaceModalOpen(false);
           setSelectedTokenId(null);
-          setError(null);
         }}
         onReplace={handleReplaceToken}
         currentTokenId={selectedTokenId || ""}

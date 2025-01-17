@@ -20,6 +20,7 @@ import { useState } from "react";
 import SparkBorder from "./SparkBorder";
 import ProfileEditModal from "./ProfileEditModal";
 import EmailSettingsModal from "./EmailSettingsModal";
+import PasswordEditModal from "./PasswordEditModal";
 
 interface EmailSettings {
   email: string;
@@ -37,6 +38,7 @@ export default function SettingsContent() {
 
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
   const settingSections = [
@@ -168,6 +170,8 @@ export default function SettingsContent() {
                       setIsProfileModalOpen(true);
                     } else if (item.name === "Email Settings") {
                       setIsEmailModalOpen(true);
+                    } else if (item.name === "Password & Security") {
+                      setIsPasswordModalOpen(true);
                     }
                   }}
                 >
@@ -204,6 +208,16 @@ export default function SettingsContent() {
             name: data.name,
             avatar: data.image
           }));
+        }}
+      />
+
+      <PasswordEditModal
+        isOpen={isPasswordModalOpen}
+        onClose={() => setIsPasswordModalOpen(false)}
+        onSave={async (passwords) => {
+          // Simulate API call
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          console.log('Updating password:', passwords);
         }}
       />
 

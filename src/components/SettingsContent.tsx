@@ -170,7 +170,7 @@ export default function SettingsContent() {
                       setIsProfileModalOpen(true);
                     } else if (item.name === "Email Settings") {
                       setIsEmailModalOpen(true);
-                    } else if (item.name === "Password & Security") {
+                    } else if (item.name === "Password Management") {
                       setIsPasswordModalOpen(true);
                     }
                   }}

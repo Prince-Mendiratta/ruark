@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import SparkBorder from "@/components/SparkBorder";
+import ProfileEditModal from "@/components/ProfileEditModal";
 
 const [userData, setUserData] = useState({
   name: "Alex Thompson",

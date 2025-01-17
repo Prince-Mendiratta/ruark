@@ -1,13 +1,14 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { LayoutDashboard, Wallet, ArrowLeftRight, Settings, Menu, X, HelpCircle, LogOut } from "lucide-react";
+import { LayoutDashboard, Wallet, ArrowLeftRight, Settings, Menu, X, HelpCircle, LogOut, LogIn } from "lucide-react";
+import { useAuthStore } from "@/lib/store/authStore";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import ProfileEditModal from "@/components/ProfileEditModal";
 
-const navItems = [
+const authenticatedNavItems = [
   {
     name: "Dashboard",
     href: "/",
@@ -32,6 +33,8 @@ const navItems = [
 
 export default function Navigation() {
   const pathname = usePathname();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const logout = useAuthStore((state) => state.logout);
   const [isOpen, setIsOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [userData, setUserData] = useState({
@@ -60,11 +63,23 @@ export default function Navigation() {
           <div className="mb-8 px-4 py-2">
             <h1 className="text-xl font-semibold text-sidebar-foreground">Hedera Tracker</h1>
           </div>
-          <div className="space-y-1">
-            {navItems.map((item) => (
+          {isAuthenticated ? (
+            <div className="space-y-1">
+              {authenticatedNavItems.map((item) => (
               <NavItem key={item.href} item={item} isActive={pathname === item.href} />
             ))}
-          </div>
+            </div>
+          ) : (
+            <div className="space-y-1">
+              <Link
+                href="/login"
+                className="flex items-center gap-3 rounded-lg px-4 py-2 text-sm font-medium text-sidebar-foreground/60 hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground transition-colors"
+              >
+                <LogIn className="h-4 w-4" />
+                <span>Sign In</span>
+              </Link>
+            </div>
+          )}
           <div className="mt-auto pt-4 border-t border-sidebar-border">
             <button 
               onClick={() => window.open('https://docs.hedera.com', '_blank')}
@@ -75,8 +90,8 @@ export default function Navigation() {
             </button>
             <button 
               onClick={() => {
-                // Add sign out logic here
-                console.log('Sign out clicked');
+                logout();
+                setIsOpen(false);
               }}
               className="w-full flex items-center gap-3 rounded-lg px-4 py-2 text-sm font-medium text-destructive hover:bg-destructive/10 transition-colors mt-2"
             >

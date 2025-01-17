@@ -1,21 +1,30 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { TrendingUp, ArrowUpRight, DollarSign, Replace } from "lucide-react";
+import { TrendingUp, ArrowUpRight, DollarSign, Replace, Loader2 } from "lucide-react";
 import { useState } from "react";
 import TokenPriceChart from "./TokenPriceChart";
 import TokenReplaceModal from "./TokenReplaceModal";
 
-const tokens = [
+interface Token {
+  id: string;
+  name: string;
+  balance: string;
+  price: string;
+  value: string;
+  image: string;
+  positive: boolean;
+}
+
+const tokens: Token[] = [
   {
     id: "0.0.1234567",
     name: "HBAR",
     balance: "1,234.56",
     price: "$0.07",
     value: "$86.42",
-    change: "+12.5%",
-    positive: true,
-    image: "https://images.unsplash.com/photo-1622630998477-20aa696ecb05?w=128&h=128&fit=crop"
+    image: "https://images.unsplash.com/photo-1622630998477-20aa696ecb05?w=128&h=128&fit=crop",
+    positive: true
   },
   {
     id: "0.0.7654321",
@@ -23,9 +32,8 @@ const tokens = [
     balance: "500.00",
     price: "$1.00",
     value: "$500.00",
-    change: "-0.1%",
-    positive: false,
-    image: "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?w=128&h=128&fit=crop"
+    image: "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?w=128&h=128&fit=crop",
+    positive: false
   },
   {
     id: "0.0.9876543",
@@ -33,9 +41,8 @@ const tokens = [
     balance: "10,000.00",
     price: "$0.08",
     value: "$800.00",
-    change: "+5.2%",
-    positive: true,
-    image: "https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?w=128&h=128&fit=crop"
+    image: "https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?w=128&h=128&fit=crop",
+    positive: true
   }
 ];
 

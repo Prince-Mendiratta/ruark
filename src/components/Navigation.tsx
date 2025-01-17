@@ -33,10 +33,10 @@ const authenticatedNavItems = [
 
 export default function Navigation() {
   const pathname = usePathname();
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  const logout = useAuthStore((state) => state.logout);
+  const { isAuthenticated, logout } = useAuthStore();
   const [isOpen, setIsOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const router = useRouter();
   const [userData, setUserData] = useState({
     name: "Demo User",
     email: "demo@example.com", 
@@ -93,6 +93,7 @@ export default function Navigation() {
                 onClick={() => {
                   logout();
                   setIsOpen(false);
+                  router.push('/');
                 }}
                 className="w-full flex items-center gap-3 rounded-lg px-4 py-2 text-sm font-medium text-destructive hover:bg-destructive/10 transition-colors mt-2"
               >

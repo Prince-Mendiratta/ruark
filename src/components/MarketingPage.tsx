@@ -66,13 +66,21 @@ export default function MarketingPage() {
               transition={{ delay: 0.4 }}
               className="flex justify-center gap-4"
             >
-              <Link
-                href="/login"
-                className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-              >
-                Get Started
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Link
+                  href="/register"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+                >
+                  Get Started
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  href="/login"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg border px-6 py-3 font-medium transition-colors hover:bg-muted"
+                >
+                  Sign In
+                </Link>
+              </div>
               <a
                 href="#features"
                 className="inline-flex items-center gap-2 rounded-lg border px-6 py-3 font-medium transition-colors hover:bg-muted"
@@ -160,13 +168,21 @@ export default function MarketingPage() {
               <p className="mb-8 text-lg text-muted-foreground">
                 Join thousands of users who trust our platform for their wallet tracking needs
               </p>
-              <Link
-                href="/login"
-                className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-              >
-                Get Started Now
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Link
+                  href="/register"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+                >
+                  Get Started Now
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  href="/login"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg border px-6 py-3 font-medium transition-colors hover:bg-muted"
+                >
+                  Sign In
+                </Link>
+              </div>
             </motion.div>
           </div>
         </div>

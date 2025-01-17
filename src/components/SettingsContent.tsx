@@ -180,6 +180,8 @@ export default function SettingsContent() {
                       setIsPasswordModalOpen(true);
                     } else if (["Appearance", "Language", "Notifications"].includes(item.name)) {
                       setIsPreferencesModalOpen(true);
+                    } else if (item.name === "Connected Wallets") {
+                      window.location.href = "/wallets";
                     }
                   }}
                 >

@@ -361,37 +361,35 @@ export default function TokensPage() {
                         <TokenPriceChart positive={token.priceChange24h >= 0} />
                       </div>
 
-                      <div className="flex-shrink-0 flex items-center gap-2">
+                      <div className="flex items-center gap-2">
+                        <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => handleTrack(token.id)}
+                          className={`rounded-xl p-3 transition-colors ${
+                            token.isTracked
+                              ? "bg-primary/10 text-primary"
+                              : "text-muted-foreground hover:bg-accent hover:text-primary"
+                          }`}
+                        >
+                          <Star
+                            className="h-5 w-5"
+                            fill={token.isTracked ? "currentColor" : "none"}
+                          />
+                        </motion.button>
+                        <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => handleHide(token.id)}
+                          className="rounded-xl p-3 text-muted-foreground transition-colors hover:bg-accent hover:text-primary"
+                        >
+                          {token.isHidden ? (
+                            <Eye className="h-5 w-5" />
+                          ) : (
+                            <EyeOff className="h-5 w-5" />
+                          )}
+                        </motion.button>
                       </div>
-                    </div>
-                  </div>
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => handleTrack(token.id)}
-                        className={`rounded-xl p-3 transition-colors ${
-                          token.isTracked
-                            ? "bg-primary/10 text-primary"
-                            : "text-muted-foreground hover:bg-accent hover:text-primary"
-                        }`}
-                      >
-                        <Star
-                          className="h-5 w-5"
-                          fill={token.isTracked ? "currentColor" : "none"}
-                        />
-                      </motion.button>
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => handleHide(token.id)}
-                        className="rounded-xl p-3 text-muted-foreground transition-colors hover:bg-accent hover:text-primary"
-                      >
-                        {token.isHidden ? (
-                          <Eye className="h-5 w-5" />
-                        ) : (
-                          <EyeOff className="h-5 w-5" />
-                        )}
-                      </motion.button>
                     </div>
                   </div>
                 </div>
